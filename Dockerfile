@@ -31,6 +31,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \
 # 必要なシミュレーション依存パッケージをまとめてインストール
 RUN apt-get update && apt-get install -y \
     ros-noetic-desktop-full \
+    nano \
     git \
     python3-catkin-tools \
     python3-rosdep \
@@ -48,9 +49,13 @@ ENV CATKIN_WS /root/catkin_ws
 RUN mkdir -p $CATKIN_WS/src
 WORKDIR $CATKIN_WS/src
 
+
+
 # Youbot モデルとシミュレーション用ファイルをクローン
 RUN git clone http://github.com/youbot/youbot_description.git -b kinetic-devel \
  && git clone https://github.com/youbot/youbot_simulation.git 
+ 
+
 
 # ワークスペースに戻ってビルド
 WORKDIR $CATKIN_WS
